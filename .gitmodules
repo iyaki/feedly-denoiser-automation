@@ -1,0 +1,6 @@
+[submodule "feedly-denoiser"]
+	path = feedly-denoiser
+	url = git@github.com:iyaki/feedly-denoiser.git
+[submodule "feedly-denoiser-lists"]
+	path = feedly-denoiser-lists
+	url = git@github.com:iyaki/feedly-denoiser-lists.git

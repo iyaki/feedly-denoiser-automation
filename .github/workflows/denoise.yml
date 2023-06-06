@@ -1,0 +1,28 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */2 * * *'
+
+jobs:
+  denoise:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v2
+      -
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      -
+        name: Dependencies setup
+        run: cd feedly-denoiser && npm install --save-exact
+      -
+        name: Denoise
+        env:
+          CLIENT_SECRET: ${{ secrets.FEEDLY_SECRET }}
+          COLLECTION: ${{ secrets.FEEDLY_COLLECTION }}
+        run: |
+          feedly-denoiser/denoise.sh \
+            feedly-denoiser-lists/blackList.json \
+            feedly-denoiser-lists/whiteList.json \
+            feedly-denoiser-lists/blackestList.json
